@@ -16,10 +16,12 @@ pipeline {
         sh 'go env'
         sh 'go get github.com/gin-gonic/gin'
         sh 'go build -o app .'
+        sh 'pwd'
       }
     }
     stage('build image') {
       steps {
+        sh 'pwd'
         sh '/usr/bin/docker build -t zouhl/webdemo .'
       }
     }
