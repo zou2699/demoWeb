@@ -21,7 +21,9 @@ pipeline {
     }
     stage('build image') {
       steps {
-        sh 'pwd'
+        sh '''pwd
+exit
+pwd'''
         sh '/usr/bin/docker build -t zouhl/webdemo .'
       }
     }
