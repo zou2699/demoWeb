@@ -1,7 +1,7 @@
 pipeline {
   agent {
-    node {
-      label '1'
+    docker {
+      image 'golang'
     }
 
   }
@@ -10,6 +10,7 @@ pipeline {
       steps {
         git(url: 'https://github.com/zou2699/demoWeb.git', branch: 'master')
         sh 'go build -o app .'
+        sh 'go env'
       }
     }
   }
