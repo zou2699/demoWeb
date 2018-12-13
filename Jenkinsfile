@@ -20,7 +20,7 @@ pipeline {
     }
     stage('build image') {
       steps {
-        sh 'docker build -t zouhl/webdemo .'
+        sh '/usr/bin/docker build -t zouhl/webdemo .'
       }
     }
   }
