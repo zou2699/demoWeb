@@ -1,15 +1,15 @@
 package main
 
 import (
-	"io"
+	"github.com/gin-gonic/gin"
 	"net/http"
 )
 
 func main() {
-	helloHandler := func(w http.ResponseWriter, req *http.Request) {
-		io.WriteString(w, "Hello, kubernetes!\n")
-	}
+	router := gin.Default()
+	router.GET("/", func(c *gin.Context) {
+		c.String(http.StatusOK, "hello kubernetes")
+	})
 
-	http.HandleFunc("/hello", helloHandler)
-	http.ListenAndServe(":8080", nil)
+	router.Run(":8080")
 }
