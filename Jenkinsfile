@@ -9,8 +9,22 @@ pipeline {
     stage('get code') {
       steps {
         git(url: 'https://github.com/zou2699/demoWeb.git', branch: 'master')
-        sh 'go build -o app .'
+      }
+    }
+    stage('build') {
+      steps {
         sh 'go env'
+        sh 'go get github.com/gin-gonic/gin'
+        sh 'go build -o app .'
+        sh 'pwd'
+      }
+    }
+    stage('build image') {
+      steps {
+        sh '''pwd
+exit
+pwd'''
+        sh '/usr/bin/docker build -t zouhl/webdemo .'
       }
     }
   }
