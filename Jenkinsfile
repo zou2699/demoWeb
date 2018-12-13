@@ -11,7 +11,7 @@ pipeline {
         git(url: 'https://github.com/zou2699/demoWeb.git', branch: 'master')
       }
     }
-    stage('') {
+    stage('build') {
       steps {
         sh 'go build -o app .'
       }
