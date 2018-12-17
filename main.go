@@ -2,6 +2,7 @@ package main
 
 import (
 	"io"
+	"log"
 	"net/http"
 )
 
@@ -11,5 +12,9 @@ func main() {
 	}
 
 	http.HandleFunc("/", helloHandler)
-	http.ListenAndServe(":8080", nil)
+	err := http.ListenAndServe(":8080", nil)
+	if err != nil {
+		log.Panic(err)
+	}
+	log.Println("http listen 8080 successful")
 }
