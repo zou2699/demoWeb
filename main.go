@@ -2,7 +2,9 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
+	"log"
 	"net/http"
+	"os"
 )
 
 func main() {
@@ -18,6 +20,14 @@ func main() {
 	//log.Println("http listen 8080 successful")
 
 	router := gin.Default()
+
+	router.GET("/", func(c *gin.Context) {
+		osName, err := os.Hostname()
+		if err != nil {
+			log.Panic(err)
+		}
+		c.JSON(200, gin.H{"hostname": osName})
+	})
 
 	router.GET("/ping", func(c *gin.Context) {
 		c.JSON(200, gin.H{

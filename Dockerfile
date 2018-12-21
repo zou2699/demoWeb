@@ -9,4 +9,4 @@ RUN go install -v ./...
 RUN rm -rf /go/src/*
 
 WORKDIR /go/bin/
-CMD ["app"]
+CMD ["./app"]
