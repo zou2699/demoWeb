@@ -9,4 +9,7 @@ RUN go install -v ./...
 RUN rm -rf /go/src/*
 
 WORKDIR /go/bin/
+
+EXPOSE 8080
+
 CMD ["./app"]
