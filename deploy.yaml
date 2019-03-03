@@ -13,7 +13,7 @@ spec:
         run: demo-web
     spec:
       containers:
-        - image: ${IMAGENAME}:${BUILD_NUMBER}
+        - image: zouhl/demo-app:${BUILD_NUMBER}
           imagePullPolicy: Always
           name: demo-web
           ports:
