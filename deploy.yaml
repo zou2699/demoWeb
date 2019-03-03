@@ -13,7 +13,7 @@ spec:
         run: demo-web
     spec:
       containers:
-        - image: ${ImageName}:${BUILD_NUMBER}
+        - image: ${IMAGENAME}:${BUILD_NUMBER}
           imagePullPolicy: Always
           name: demo-web
           ports:
