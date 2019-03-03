@@ -50,5 +50,5 @@ func main() {
 		c.String(http.StatusOK, message)
 	})
 
-	router.Run(":8080")
+	router.Run(":80")
 }

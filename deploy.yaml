@@ -1,0 +1,36 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: demo-web
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      run: demo-web
+  template:
+    metadata:
+      labels:
+        run: demo-web
+    spec:
+      containers:
+        - image: zouhl/demoweb:12
+          imagePullPolicy: Always
+          name: demo-web
+          ports:
+            - containerPort: 80
+              protocol: TCP
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: demo-web
+spec:
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 80
+  selector:
+    run: demo-web
+  sessionAffinity: None
+  type: NodePort
