@@ -5,6 +5,8 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"runtime"
+	"time"
 )
 
 func main() {
@@ -50,5 +52,50 @@ func main() {
 		c.String(http.StatusOK, message)
 	})
 
+	router.GET("/pi", computePi)
+
 	router.Run(":80")
+}
+
+// for hpa test
+var n int64 = 10000000000
+var h float64 = 1.0 / float64(n)
+
+func f(a float64) float64 {
+	return 4.0 / (1.0 + a*a)
+}
+
+func computePi(c *gin.Context) {
+	var pi float64
+	np := runtime.NumCPU()
+	runtime.GOMAXPROCS(np)
+	cn := make(chan float64, np)
+
+	start := time.Now()
+
+	for i := 0; i < np; i++ {
+		go chunk(int64(i)*n/int64(np), (int64(i)+1)*n/int64(np), cn)
+	}
+
+	for i := 0; i < np; i++ {
+		pi += <-cn
+	}
+
+	elapsed := time.Since(start)
+
+	c.JSON(http.StatusOK, gin.H{
+		"cpuNum":   np,
+		"pi":       pi,
+		"usedTime": elapsed,
+	})
+
+}
+
+func chunk(start, end int64, c chan float64) {
+	var sum float64 = 0.0
+	for i := start; i < end; i++ {
+		x := h * (float64(i) + 0.5)
+		sum += f(x)
+	}
+	c <- sum * h
 }
