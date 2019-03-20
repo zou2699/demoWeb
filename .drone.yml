@@ -1,6 +1,14 @@
 kind: pipeline
 name: default
 
+workspace:
+  base: /go
+  path: src/github.com/zou2699/demoweb
+
+clone:
+  depth: 50
+
+
 steps:
   - name: backend
     image: golang:1.11
