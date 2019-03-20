@@ -6,5 +6,7 @@ steps:
     image: golang:1.11
     commands:
       - pwd
+      - ls
+      - cat
       - go build
       - go test
