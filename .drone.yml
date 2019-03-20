@@ -15,6 +15,21 @@ steps:
     commands:
       - pwd
       - ls
-      - cat
       - go build
       - go test
+      - ls
+  
+  - name: publish
+    image: plugins/docker:18.06
+    settings:
+      repo: zouhl/demo-app
+      auto_tag: true
+      dockerfile: Dockerfile
+      username:
+        from_secret: docker_username
+      password:
+        from_secret: docker_password
+    when:
+      event:
+        - push
+        - tag
