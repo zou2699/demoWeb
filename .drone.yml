@@ -18,6 +18,7 @@ steps:
       - go build
       - go test
       - ls
+      - env
   
   - name: publish
     image: plugins/docker
