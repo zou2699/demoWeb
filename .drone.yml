@@ -3,8 +3,7 @@ name: default
 
 steps:
   - name: backend
-    image: golang
+    image: golang:1.11
     commands:
-      - go get -d -v ./...
       - go build
       - go test
