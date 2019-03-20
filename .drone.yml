@@ -20,7 +20,7 @@ steps:
       - ls
   
   - name: publish
-    image: plugins/docker:18.06
+    image: plugins/docker
     settings:
       repo: zouhl/demo-app
       auto_tag: true
